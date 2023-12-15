@@ -15,16 +15,16 @@ class AdvancedSettings(wx.Dialog):
 
         vSizer = wx.BoxSizer(wx.VERTICAL)
         warning_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        warning_text = '''WARNING!
-This is advanced configuration.
-Unless you know what you are doing,
-you should not be enabling it.
+        warning_text = '''警告！
+这是高级配置。
+除非你知道你在做什么，
+否则你不应该启用它。
 
-YOU AND YOU ALONE ARE RESPONSIBLE FOR ANYTHING THAT HAPPENS TO YOUR DEVICE.
-THIS TOOL IS CODED WITH THE EXPRESS ASSUMPTION THAT YOU ARE FAMILIAR WITH
-ADB, MAGISK, ANDROID, AND ROOT.
-IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
-'''
+你必须对你的设备发生的任何事情负责。
+这个工具的编写是基于你熟悉下面这些概念的前提下的：
+ADB，Magisk，Android和Root。
+确保你知道你在做什么是你自己的责任。
+    '''
         # warning label
         self.warning_label = wx.StaticText(parent=self, id=wx.ID_ANY, label=warning_text, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.ALIGN_CENTER_HORIZONTAL)
         self.warning_label.Wrap(-1)
@@ -50,24 +50,23 @@ IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
         # this makes the second column expandable (index starts at 0)
         fgs1.AddGrowableCol(1, 1)
 
-        # Magisk Package name
-        package_name_label = wx.StaticText(parent=self, label=u"Magisk Package Name")
+        # Magisk包名
+        package_name_label = wx.StaticText(parent=self, label=u"Magisk包名")
         self.package_name = wx.TextCtrl(parent=self, id=-1, size=(-1, -1))
-        self.package_name.SetToolTip(u"If you have hidden Magisk,\nset this to the hidden package name.")
+        self.package_name.SetToolTip(u"如果你已经隐藏了Magisk，\n请将此设置为隐藏的包名。")
         self.reset_magisk_pkg = wx.BitmapButton(parent=self, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         self.reset_magisk_pkg.SetBitmap(images.scan_24.GetBitmap())
-        self.reset_magisk_pkg.SetToolTip(u"Resets package name to default: com.topjohnwu.magisk")
+        self.reset_magisk_pkg.SetToolTip(u"将包名重置为默认值：com.topjohnwu.magisk")
         package_name_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         package_name_sizer.Add(self.package_name, proportion=1, flag=wx.ALL, border=0)
         package_name_sizer.Add(self.reset_magisk_pkg, proportion=0, flag=wx.LEFT|wx.ALIGN_CENTER_VERTICAL, border=5)
-
         # only add if we're on linux
         if sys.platform.startswith("linux"):
-            # Linux File Explorer
-            file_explorer_label = wx.StaticText(self, label=u"Linux File Explorer:")
+            # Linux 文件管理器
+            file_explorer_label = wx.StaticText(self, label=u"Linux 文件管理器:")
             file_explorer_label.SetSize(self.package_name.GetSize())
             self.file_explorer = wx.TextCtrl(self, -1, size=(300, -1))
-            self.file_explorer.SetToolTip(u"Set full path to File Explorer.\nDefault: Nautilus")
+            self.file_explorer.SetToolTip(u"设置文件管理器的完整路径。\n默认值：Nautilus")
             file_explorer_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
             file_explorer_sizer.Add((20, 0), proportion=0, flag=wx.ALL, border=5)
             file_explorer_sizer.Add(self.file_explorer, proportion=0, flag=wx.LEFT, border=10)
@@ -76,70 +75,71 @@ IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
             shell_label = wx.StaticText(parent=self, label=u"Linux Shell:")
             shell_label.SetSize(self.package_name.GetSize())
             self.shell = wx.TextCtrl(parent=self, id=wx.ID_ANY, size=(300, -1))
-            self.shell.SetToolTip(u"Set full path to Linux Shell.\nDefault: gnome-terminal")
+            self.shell.SetToolTip(u"设置 Linux Shell 的完整路径。\n默认值：gnome-terminal")
             shell_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
             shell_sizer.Add((20, 0), proportion=0, flag=wx.ALL, border=5)
             shell_sizer.Add(self.shell, proportion=0, flag=wx.LEFT, border=10)
 
-        # Offer Patch methods
-        self.patch_methods_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Offer Patch Methods", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.patch_methods_checkbox.SetToolTip(u"When patching the choice of method is presented.")
-        self.recovery_patch_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Patching Recovery Partition", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.recovery_patch_checkbox.SetToolTip(u"Enabling this will show an option to patch a recovery partition.\nThis should be kept disabled unless you have an old device.\n(most A-only devices launched with Android 9, legacy SAR)")
 
-        # Use Busybox Shell
-        self.use_busybox_shell_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Use Busybox Shell", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.use_busybox_shell_checkbox.SetToolTip(u"When creating a patch, if this is checked, busybox ash will be used as shell.")
+        # 提供补丁方法
+        self.patch_methods_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"提供补丁方法", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.patch_methods_checkbox.SetToolTip(u"打补丁时将呈现选择方法的选项。")
+        self.recovery_patch_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"修补恢复分区", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.recovery_patch_checkbox.SetToolTip(u"启用此选项将显示修补恢复分区的选项。\n除非您的设备较旧，否则应保持禁用状态。\n（大多数仅带有 Android 9 的 A-only 设备，传统 SAR）")
 
-        # Enable Low Memory
-        self.low_mem_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"System has low memory", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.low_mem_checkbox.SetToolTip(u"Use this option to sacrifice speed in favor of memory.")
+        # 使用 Busybox Shell
+        self.use_busybox_shell_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"使用 Busybox Shell", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.use_busybox_shell_checkbox.SetToolTip(u"创建补丁时，如果勾选此选项，将使用 busybox ash 作为 shell。")
 
-        # Extra img extraction
-        self.extra_img_extracts_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Extra img extraction", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.extra_img_extracts_checkbox.SetToolTip(u"When checked and available in payload.bin\nAlso extract vendor_boot.img, vendor_kernel_boot.img, dtbo.img, super_empty.img")
+        # 启用低内存模式
+        self.low_mem_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"系统内存较低", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.low_mem_checkbox.SetToolTip(u"使用此选项以牺牲速度来节省内存。")
 
-        # Show Notifications
-        self.show_notifications_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Show notifications", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.show_notifications_checkbox.SetToolTip(u"When checked PixelFlasher will display system toast notifications.")
+        # 额外的 img 提取
+        self.extra_img_extracts_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"额外的 img 提取", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.extra_img_extracts_checkbox.SetToolTip(u"勾选此选项且 payload.bin 中可用时\n还将提取 vendor_boot.img、vendor_kernel_boot.img、dtbo.img、super_empty.img")
 
-        # Always Create boot.tar
-        self.create_boot_tar_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Always create boot.tar", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.create_boot_tar_checkbox.SetToolTip(u"When checked, PixelFlasher always creates boot.tar of the patched boot file.\nIf unchecked, only for Samsung firmware boot.tar will be created.")
+        # 显示通知
+        self.show_notifications_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"显示通知", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.show_notifications_checkbox.SetToolTip(u"勾选后，PixelFlasher 将显示系统吐司通知。")
+
+        # 始终创建 boot.tar
+        self.create_boot_tar_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"始终创建 boot.tar", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.create_boot_tar_checkbox.SetToolTip(u"勾选后，PixelFlasher 总是为打过补丁的启动文件创建 boot.tar。\n如果未勾选，只为三星固件创建 boot.tar。")
         self.create_boot_tar_checkbox.Disable()
 
-        # Check for updates options
-        self.check_for_update_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Check for updates", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.check_for_update_checkbox.SetToolTip(u"Checks for available updates on startup")
+        # 检查更新选项
+        self.check_for_update_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"检查更新", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.check_for_update_checkbox.SetToolTip(u"在启动时检查可用更新")
 
-        # Check for Minimum Disk space option
-        self.check_for_disk_space_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Check for Minumum Disk (5Gb)", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.check_for_disk_space_checkbox.SetToolTip(u"Enforces minimum disk space of 5 Gb to allow flashing.\nThis avoids storage related issues.")
+        # 检查最小磁盘空间选项
+        self.check_for_disk_space_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"检查最小磁盘空间 (5Gb)", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.check_for_disk_space_checkbox.SetToolTip(u"执行闪存前强制要求至少 5 Gb 的磁盘空间。\n这有助于避免存储相关问题。")
 
-        # Check for Bootloader unlocked option
-        self.check_for_bootloader_unlocked_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Check for bootloader unlocked", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.check_for_bootloader_unlocked_checkbox.SetToolTip(u"Checks to make sure bootloader is unlocked before flashing.")
+        # 检查 Bootloader 解锁选项
+        self.check_for_bootloader_unlocked_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"检查 bootloader 解锁", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.check_for_bootloader_unlocked_checkbox.SetToolTip(u"在执行闪存前检查 bootloader 是否已解锁。")
 
-        # Check for Firmware hash validity option
-        self.check_for_firmware_hash_validity_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Check for firmware hash validity", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.check_for_firmware_hash_validity_checkbox.SetToolTip(u"Checks for sha256 portion to be in the image filename to detect Pixel compatible image.")
+        # 检查固件哈希有效性选项
+        self.check_for_firmware_hash_validity_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"检查固件哈希有效性", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.check_for_firmware_hash_validity_checkbox.SetToolTip(u"检查图像文件名中是否包含 sha256 部分，以便检测 Pixel 兼容的图像。")
 
-        # Force codepage
-        self.force_codepage_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Force codepage to", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.force_codepage_checkbox.SetToolTip(u"Uses specified code page instead of system code page")
+        # 强制代码页
+        self.force_codepage_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"强制代码页为", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.force_codepage_checkbox.SetToolTip(u"使用指定的代码页，而不是系统代码页")
         self.code_page = wx.TextCtrl(parent=self, id=wx.ID_ANY, size=(-1, -1))
 
-        # Delete Bundle libs
-        self.delete_bundled_libs_label = wx.StaticText(parent=self, id=wx.ID_ANY, label=u"Delete bundled libs")
-        self.delete_bundled_libs_label.SetToolTip(u"The listed libraries would be deleted from the PF bundle to allow system defined ones to be used.")
+        # 删除捆绑库
+        self.delete_bundled_libs_label = wx.StaticText(parent=self, id=wx.ID_ANY, label=u"删除捆绑库")
+        self.delete_bundled_libs_label.SetToolTip(u"将列出的库从 PF 捆绑中删除，以便使用系统定义的库。")
         self.delete_bundled_libs = wx.SearchCtrl(self, style=wx.TE_LEFT)
         self.delete_bundled_libs.ShowCancelButton(True)
-        self.delete_bundled_libs.SetDescriptiveText("Example: libreadline.so.8, libgdk*")
+        self.delete_bundled_libs.SetDescriptiveText("示例：libreadline.so.8, libgdk*")
         self.delete_bundled_libs.ShowSearchButton(False)
 
-        # Use Custom Font
-        self.use_custom_font_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"Use Custom Fontface", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.use_custom_font_checkbox.SetToolTip(u"Use custom font for monospace fonts\nMight require PixelFlasher restart to properly apply to the Console window.")
+        # 使用自定义字体
+        self.use_custom_font_checkbox = wx.CheckBox(parent=self, id=wx.ID_ANY, label=u"使用自定义字体", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.use_custom_font_checkbox.SetToolTip(u"为等宽字体使用自定义字体\n可能需要重启 PixelFlasher 以正确应用于控制台窗口。")
 
         # Font Selection
         fonts = wx.FontEnumerator()
@@ -156,14 +156,14 @@ IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
         self.font_size.SetToolTip('Select font size')
         self._onFontSelect(None)
 
-        # scrcpy 1st row widgets, select path
-        self.scrcpy_path_label = wx.StaticText(parent=self, id=wx.ID_ANY, label=u"Srccpy Path")
+        # scrcpy 第一行控件，选择路径
+        self.scrcpy_path_label = wx.StaticText(parent=self, id=wx.ID_ANY, label=u"Scrcpy 路径")
         self.srccpy_link = wx.BitmapButton(parent=self, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         self.srccpy_link.SetBitmap(bitmap=images.open_link_24.GetBitmap())
-        self.srccpy_link.SetToolTip("Download Srccpy")
-        self.scrcpy_path_picker = wx.FilePickerCtrl(parent=self, id=wx.ID_ANY, path=wx.EmptyString, message=u"Select scrcpy executable", wildcard=u"Scrcpy executable (*.exe;*)|*.exe;*", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.FLP_USE_TEXTCTRL)
+        self.srccpy_link.SetToolTip("下载 Scrcpy")
+        self.scrcpy_path_picker = wx.FilePickerCtrl(parent=self, id=wx.ID_ANY, path=wx.EmptyString, message=u"选择 scrcpy 可执行文件", wildcard=u"Scrcpy 可执行文件 (*.exe;*)|*.exe;*", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.FLP_USE_TEXTCTRL)
 
-        self.scrcpy_path_picker.SetToolTip("Select scrcpy executable")
+        self.scrcpy_path_picker.SetToolTip("选择 scrcpy 可执行文件")
         self.scrcpy_h1sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         self.scrcpy_h1sizer.Add(window=self.scrcpy_path_label, proportion=0, flag=wx.EXPAND)
         self.scrcpy_h1sizer.AddSpacer(10)
@@ -171,14 +171,14 @@ IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
         self.scrcpy_h1sizer.AddSpacer(10)
         self.scrcpy_h1sizer.Add(window=self.scrcpy_path_picker, proportion=1, flag=wx.EXPAND)
 
-        # scrcpy 2nd row flags
+        # scrcpy 第二行标志
         self.scrcpy_flags = wx.SearchCtrl(self, style=wx.TE_LEFT)
         self.scrcpy_flags.ShowCancelButton(True)
-        self.scrcpy_flags.SetDescriptiveText("Flags / Arguments (Example: --video-bit-rate 2M --max-fps=30 --max-size 1024)")
+        self.scrcpy_flags.SetDescriptiveText("标志/参数（例如：--video-bit-rate 2M --max-fps=30 --max-size 1024）")
         self.scrcpy_flags.ShowSearchButton(False)
 
-        # build the sizers for scrcpy
-        scrcpy_sb = wx.StaticBox(self, -1, "Scrcpy settings")
+        # 为 scrcpy 构建布局
+        scrcpy_sb = wx.StaticBox(self, -1, "Scrcpy 设置")
         scrcpy_vsizer = wx.StaticBoxSizer(scrcpy_sb, wx.VERTICAL)
         scrcpy_vsizer.Add(self.scrcpy_h1sizer, proportion=1, flag=wx.ALL|wx.EXPAND, border=5)
         scrcpy_vsizer.Add(self.scrcpy_flags, proportion=1, flag=wx.ALL|wx.EXPAND, border=5)

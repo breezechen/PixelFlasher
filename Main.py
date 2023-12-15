@@ -445,13 +445,13 @@ class PixelFlasher(wx.Frame):
 
             # Install APK
             if self.config.toolbar['visible']['install_apk']:
-                tb.AddTool(toolId=5, label="Install APK", bitmap=images.install_apk_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Install APK on the device", longHelp="Install APK on the device", clientData=None)
+                tb.AddTool(toolId=5, label="安装 APK", bitmap=images.install_apk_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="在设备上安装 APK", longHelp="在设备上安装 APK", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=5)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=5)
 
             # Package Manager
             if self.config.toolbar['visible']['package_manager']:
-                tb.AddTool(toolId=8, label="App Manager", bitmap=images.packages_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Package Manager", longHelp="Manage Apps / Packages", clientData=None)
+                tb.AddTool(toolId=8, label="应用管理器", bitmap=images.packages_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="包管理器", longHelp="管理应用/包", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=8)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=8)
 
@@ -461,19 +461,19 @@ class PixelFlasher(wx.Frame):
 
             # Shell
             if self.config.toolbar['visible']['adb_shell']:
-                tb.AddTool(toolId=10, label="ADB Shell", bitmap=images.shell_64.GetBitmap(), bmpDisabled=images.shell_64_disabled.GetBitmap(), kind=wx.ITEM_NORMAL, shortHelp="Open ADB shell to the device.", longHelp="Open adb shell to the device", clientData=None)
+                tb.AddTool(toolId=10, label="ADB Shell", bitmap=images.shell_64.GetBitmap(), bmpDisabled=images.shell_64_disabled.GetBitmap(), kind=wx.ITEM_NORMAL, shortHelp="打开设备的 ADB shell。", longHelp="打开设备的 adb shell", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=10)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=10)
 
             # Scrcpy
             if self.config.toolbar['visible']['scrcpy']:
-                tb.AddTool(toolId=15, label="Scrcpy", bitmap=images.scrcpy_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Launch Screen Copy", longHelp="Launch Screen Copy", clientData=None)
+                tb.AddTool(toolId=15, label="手机投屏", bitmap=images.scrcpy_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="启动屏幕复制", longHelp="启动屏幕复制", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=15)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=15)
 
             # Device Info
             if self.config.toolbar['visible']['device_info']:
-                tb.AddTool(toolId=20, label="Device Info", bitmap=images.about_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Dump Full Device Info", longHelp="Dump Full Device Info", clientData=None)
+                tb.AddTool(toolId=20, label="设备信息", bitmap=images.about_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="获取完整设备信息", longHelp="获取完整设备信息", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=20)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=20)
 
@@ -485,7 +485,7 @@ class PixelFlasher(wx.Frame):
 
             # Partition Manager
             if self.config.toolbar['visible']['partition_manager'] and self.config.advanced_options:
-                tb.AddTool(toolId=40, label="Partitions", bitmap=images.partition_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Partition Manager", longHelp="Partition Manager", clientData=None)
+                tb.AddTool(toolId=40, label="分区管理", bitmap=images.partition_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="分区管理器", longHelp="分区管理器", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=40)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=40)
 
@@ -495,7 +495,7 @@ class PixelFlasher(wx.Frame):
 
             # Switch Slot
             if self.config.toolbar['visible']['switch_slot'] and self.config.advanced_options:
-                tb.AddTool(toolId=100, label="Switch Slot", bitmap=images.switch_slot_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Switch to the other Slot", longHelp="Switch to the other Slot", clientData=None)
+                tb.AddTool(toolId=100, label="切换slot", bitmap=images.switch_slot_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="切换到另一个插槽", longHelp="切换到另一个插槽", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=100)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=100)
                 # separator
@@ -503,31 +503,31 @@ class PixelFlasher(wx.Frame):
 
             # Reboot to System
             if self.config.toolbar['visible']['reboot_system']:
-                tb.AddTool(toolId=110, label="System", bitmap=images.reboot_system_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Reboot to System", longHelp="Reboot to System", clientData=None)
+                tb.AddTool(toolId=110, label="重启系统", bitmap=images.reboot_system_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="重启到系统", longHelp="重启到系统", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=110)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=110)
 
             # Reboot to Bootloader
             if self.config.toolbar['visible']['reboot_bootloader']:
-                tb.AddTool(toolId=120, label="Bootloader", bitmap=images.reboot_bootloader_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Reboot to Bootloader", longHelp="Reboot to Bootloader", clientData=None)
+                tb.AddTool(toolId=120, label="重启到bootloader", bitmap=images.reboot_bootloader_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="重启到引导加载程序", longHelp="重启到引导加载程序", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=120)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=120)
 
             # Reboot to fastbootd
             if self.config.toolbar['visible']['reboot_fastbootd']:
-                tb.AddTool(toolId=125, label="fastbootd", bitmap=images.reboot_fastbootd_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Reboot to userspace fastboot (fastbootd)", longHelp="Reboot to userspace fastboot (fastbootd)", clientData=None)
+                tb.AddTool(toolId=125, label="重启到fastbootd", bitmap=images.reboot_fastbootd_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="重启到用户空间快速启动（fastbootd）", longHelp="重启到用户空间快速启动（fastbootd）", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=125)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=125)
 
             # Reboot to Recovery
             if self.config.toolbar['visible']['reboot_recovery'] and self.config.advanced_options:
-                tb.AddTool(toolId=130, label="Recovery", bitmap=images.reboot_recovery_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Reboot to Recovery", longHelp="Reboot to Recovery", clientData=None)
+                tb.AddTool(toolId=130, label="重启到recovery", bitmap=images.reboot_recovery_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="重启到恢复模式", longHelp="重启到恢复模式", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=130)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=130)
 
             # Reboot to Safe Mode
             if self.config.toolbar['visible']['reboot_safe_mode'] and self.config.advanced_options:
-                tb.AddTool(toolId=140, label="Safe Mode", bitmap=images.reboot_safe_mode_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Reboot to Safe Mode", longHelp="Reboot to Safe Mode", clientData=None)
+                tb.AddTool(toolId=140, label="重启到安全模式", bitmap=images.reboot_safe_mode_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Reboot to Safe Mode", longHelp="Reboot to Safe Mode", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=140)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=140)
 
@@ -555,7 +555,7 @@ class PixelFlasher(wx.Frame):
 
             # Download and Install Magisk Manager
             if self.config.toolbar['visible']['install_magisk']:
-                tb.AddTool(toolId=210, label="Install Magisk", bitmap=images.install_magisk_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Download and Install Magisk Manager", longHelp="Download and Install Magisk Manager", clientData=None)
+                tb.AddTool(toolId=210, label="安装Magisk", bitmap=images.install_magisk_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Download and Install Magisk Manager", longHelp="Download and Install Magisk Manager", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=210)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=210)
 
@@ -577,13 +577,13 @@ class PixelFlasher(wx.Frame):
 
             # Lock Bootloader
             if self.config.toolbar['visible']['lock_bootloader'] and self.config.advanced_options:
-                tb.AddTool(toolId=300, label="Lock", bitmap=images.lock_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Lock Bootloader", longHelp="Lock Bootloader", clientData=None)
+                tb.AddTool(toolId=300, label="锁定BL", bitmap=images.lock_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Lock Bootloader", longHelp="Lock Bootloader", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=300)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=300)
 
             # UnLock Bootloader
             if self.config.toolbar['visible']['unlock_bootloader'] and self.config.advanced_options:
-                tb.AddTool(toolId=310, label="UnLock", bitmap=images.unlock_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="UnLock Bootloader\nCaution will wipe data", longHelp="UnLock Bootloader", clientData=None)
+                tb.AddTool(toolId=310, label="解锁BL", bitmap=images.unlock_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="UnLock Bootloader\nCaution will wipe data", longHelp="UnLock Bootloader", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=310)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=310)
 
@@ -595,7 +595,7 @@ class PixelFlasher(wx.Frame):
 
             if self.config.toolbar['visible']['configuration']:
             # Configuration
-                tb.AddTool(toolId=900, label="Settings", bitmap=images.settings_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Settings", longHelp="Configuration Settings", clientData=None)
+                tb.AddTool(toolId=900, label="设置", bitmap=images.settings_64.GetBitmap(), bmpDisabled=null_bmp, kind=wx.ITEM_NORMAL, shortHelp="Settings", longHelp="Configuration Settings", clientData=None)
                 self.Bind(wx.EVT_TOOL, self.OnToolClick, id=900)
                 self.Bind(wx.EVT_TOOL_RCLICKED, self.OnToolRClick, id=900)
 
@@ -3656,9 +3656,9 @@ class PixelFlasher(wx.Frame):
         self.platform_tools_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"Android Platform Tools")
         self.sdk_link = wx.BitmapButton(parent=panel, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         self.sdk_link.SetBitmap(bitmap=images.open_link_24.GetBitmap())
-        self.sdk_link.SetToolTip("Download Latest Android Platform-Tools")
+        self.sdk_link.SetToolTip("下载最新的Android Platform-Tools")
         self.platform_tools_picker = wx.DirPickerCtrl(parent=panel, id=wx.ID_ANY, style=wx.DIRP_USE_TEXTCTRL | wx.DIRP_DIR_MUST_EXIST)
-        self.platform_tools_picker.SetToolTip("Select Android Platform-Tools Folder\nWhere adb and fastboot are located.")
+        self.platform_tools_picker.SetToolTip("选择Android Platform-Tools文件夹\nadb和fastboot位于此处。")
         platform_tools_label_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         platform_tools_label_sizer.Add(window=self.platform_tools_label, proportion=0, flag=wx.ALL, border=5)
         platform_tools_label_sizer.AddStretchSpacer()
@@ -3667,11 +3667,11 @@ class PixelFlasher(wx.Frame):
         self.sdk_sizer.Add(window=self.platform_tools_picker, proportion=1, flag=wx.EXPAND)
 
         # 2nd row widgets, Connected Devices
-        self.device_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"ADB Connected Devices")
-        self.device_label.SetToolTip(u"Double click this label to issue the command:\nadb kill-server")
+        self.device_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"ADB已连接的设备")
+        self.device_label.SetToolTip(u"双击此标签以发出命令:\nadb kill-server")
         self.wifi_adb = wx.BitmapButton(parent=panel, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         self.wifi_adb.SetBitmap(images.wifi_adb_24.GetBitmap())
-        self.wifi_adb.SetToolTip(u"Open wireless manager dialog.")
+        self.wifi_adb.SetToolTip(u"打开无线管理器对话框。")
         adb_label_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         adb_label_sizer.Add(window=self.device_label, proportion=0, flag=wx.ALL, border=5)
         adb_label_sizer.AddStretchSpacer()
@@ -3679,17 +3679,17 @@ class PixelFlasher(wx.Frame):
         self.device_choice = wx.ComboBox(parent=panel, id=wx.ID_ANY, value=wx.EmptyString, pos=wx.DefaultPosition, size=wx.DefaultSize, choices=[], style=wx.CB_DROPDOWN | wx.CB_READONLY)
         self.device_choice.SetSelection(-1)
         self.device_choice.SetFont(font=wx.Font(9, wx.FONTFAMILY_TELETYPE, wx.FONTSTYLE_NORMAL,wx.FONTWEIGHT_NORMAL))
-        device_tooltip = "[root status] [device mode] [device id] [device model] [device firmware]\n\n"
-        device_tooltip += "✓ Rooted with Magisk.\n"
-        device_tooltip += "✗ Probably Not Root (Magisk Tools not found).\n"
-        device_tooltip += "?  Unable to determine the root status.\n\n"
-        device_tooltip += "(adb) device is in adb mode\n"
-        device_tooltip += "(f.b) device is in fastboot mode\n"
-        device_tooltip += "(sid) device is in sideload mode\n"
-        device_tooltip += "(rec) device is in recovery mode\n"
+        device_tooltip = "[root状态] [设备模式] [设备id] [设备型号] [设备固件]\n\n"
+        device_tooltip += "✓ 使用Magisk进行了Root。\n"
+        device_tooltip += "✗ 可能没有Root（未找到Magisk工具）。\n"
+        device_tooltip += "? 无法确定root状态。\n\n"
+        device_tooltip += "(adb) 设备处于adb模式\n"
+        device_tooltip += "(f.b) 设备处于fastboot模式\n"
+        device_tooltip += "(sid) 设备处于sideload模式\n"
+        device_tooltip += "(rec) 设备处于恢复模式\n"
         self.device_choice.SetToolTip(device_tooltip)
-        self.scan_button = wx.Button(parent=panel, label=u"Scan")
-        self.scan_button.SetToolTip(u"Scan for Devices\nPlease manually select the device after the scan is completed.")
+        self.scan_button = wx.Button(parent=panel, label=u"扫描")
+        self.scan_button.SetToolTip(u"扫描设备\n扫描完成后，请手动选择设备。")
         self.scan_button.SetBitmap(images.scan_24.GetBitmap())
         device_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         device_sizer.Add(window=self.device_choice, proportion=1, flag=wx.EXPAND)
@@ -3710,19 +3710,19 @@ class PixelFlasher(wx.Frame):
         self.staticline1.SetForegroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHT))
 
         # 5th row widgets, firmware file
-        firmware_label = wx.StaticText(parent=panel, label=u"Device Image")
+        firmware_label = wx.StaticText(parent=panel, label=u"设备镜像")
         firmware_button = DropDownButton(parent=panel, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         firmware_button.SetBitmap(images.open_link_24.GetBitmap())
-        firmware_button.SetToolTip(u"Download image file for Pixel devices.")
-        firmware_button.AddLink("Full OTA Images for Pixel Phones / Tablets", FULL_OTA_IMAGES_FOR_PIXEL_DEVICES, images.phone_green_24.GetBitmap())
-        firmware_button.AddLink("Factory Images for Pixel Phones / Tablets", FACTORY_IMAGES_FOR_PIXEL_DEVICES, images.phone_blue_24.GetBitmap())
-        firmware_button.AddLink("Full OTA Images for Pixel Watches", FULL_OTA_IMAGES_FOR_WATCH_DEVICES, images.watch_green_24.GetBitmap())
-        firmware_button.AddLink("Factory Images for Pixel Watches", FACTORY_IMAGES_FOR_WATCH_DEVICES, images.watch_blue_24.GetBitmap())
-        self.firmware_picker = wx.FilePickerCtrl(parent=panel, id=wx.ID_ANY, path=wx.EmptyString, message=u"Select a file", wildcard=u"Factory Image files (*.zip;*.tgz;*.tar)|*.zip;*.tgz;*.tar", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.FLP_USE_TEXTCTRL)
-        self.firmware_picker.SetToolTip(u"Select Pixel Firmware")
-        self.process_firmware = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Process", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        firmware_button.SetToolTip(u"下载Pixel设备的镜像文件。")
+        firmware_button.AddLink("Pixel手机/平板的完整OTA镜像", FULL_OTA_IMAGES_FOR_PIXEL_DEVICES, images.phone_green_24.GetBitmap())
+        firmware_button.AddLink("Pixel手机/平板的工厂镜像", FACTORY_IMAGES_FOR_PIXEL_DEVICES, images.phone_blue_24.GetBitmap())
+        firmware_button.AddLink("Pixel手表的完整OTA镜像", FULL_OTA_IMAGES_FOR_WATCH_DEVICES, images.watch_green_24.GetBitmap())
+        firmware_button.AddLink("Pixel手表的工厂镜像", FACTORY_IMAGES_FOR_WATCH_DEVICES, images.watch_blue_24.GetBitmap())
+        self.firmware_picker = wx.FilePickerCtrl(parent=panel, id=wx.ID_ANY, path=wx.EmptyString, message=u"选择一个文件", wildcard=u"工厂镜像文件 (*.zip;*.tgz;*.tar)|*.zip;*.tgz;*.tar", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.FLP_USE_TEXTCTRL)
+        self.firmware_picker.SetToolTip(u"选择Pixel固件")
+        self.process_firmware = wx.Button(parent=panel, id=wx.ID_ANY, label=u"处理", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
         self.process_firmware.SetBitmap(images.process_file_24.GetBitmap())
-        self.process_firmware.SetToolTip(u"Process the firmware file and extract the boot.img")
+        self.process_firmware.SetToolTip(u"处理固件文件并提取boot.img")
         firmware_label_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         firmware_label_sizer.Add(window=firmware_label, proportion=0, flag=wx.ALL, border=5)
         firmware_label_sizer.AddStretchSpacer(1)
@@ -3730,23 +3730,22 @@ class PixelFlasher(wx.Frame):
         self.firmware_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         self.firmware_sizer.Add(window=self.firmware_picker, proportion=1, flag=wx.EXPAND)
         self.firmware_sizer.Add(window=self.process_firmware, flag=wx.LEFT, border=5)
-
         # 6th row widgets, custom_rom
-        self.custom_rom_checkbox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Apply Custom ROM", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.custom_rom_checkbox.SetToolTip(u"Caution: Make sure you read the selected ROM documentation.\nThis might not work for your ROM")
-        self.custom_rom = wx.FilePickerCtrl(parent=panel, id=wx.ID_ANY, path=wx.EmptyString, message=u"Select a file", wildcard=u"ROM files (*.zip;*.tgz;*.tar)|*.zip;*.tgz;*.tar", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.FLP_USE_TEXTCTRL)
-        self.custom_rom.SetToolTip(u"Select Custom ROM")
-        self.process_rom = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Process", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.custom_rom_checkbox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"应用自定义ROM", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.custom_rom_checkbox.SetToolTip(u"警告：请确保你已阅读所选ROM的文档。\n这可能不适用于你的ROM")
+        self.custom_rom = wx.FilePickerCtrl(parent=panel, id=wx.ID_ANY, path=wx.EmptyString, message=u"选择一个文件", wildcard=u"ROM文件 (*.zip;*.tgz;*.tar)|*.zip;*.tgz;*.tar", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.FLP_USE_TEXTCTRL)
+        self.custom_rom.SetToolTip(u"选择自定义ROM")
+        self.process_rom = wx.Button(parent=panel, id=wx.ID_ANY, label=u"处理", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
         self.process_rom.SetBitmap(images.process_file_24.GetBitmap())
-        self.process_rom.SetToolTip(u"Process the ROM file and extract the boot.img")
+        self.process_rom.SetToolTip(u"处理ROM文件并提取boot.img")
         custom_rom_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         custom_rom_sizer.Add(window=self.custom_rom, proportion=1, flag=wx.EXPAND)
         custom_rom_sizer.Add(window=self.process_rom, flag=wx.LEFT, border=5)
 
         # 7th row widgets, boot.img related widgets
-        self.select_boot_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"Select a boot/init_boot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.show_all_boot_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Show All boot/init_boot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.show_all_boot_checkBox.SetToolTip(u"Show all boot/init_boot even if it is\nnot part of the selected firmware or ROM")
+        self.select_boot_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"选择一个boot/init_boot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.show_all_boot_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"显示所有boot/init_boot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.show_all_boot_checkBox.SetToolTip(u"显示所有boot/init_boot，即使它不是所选固件或ROM的一部分")
         # list control
         if self.CharHeight > 20:
             self.il = wx.ImageList(24, 24)
@@ -3757,13 +3756,13 @@ class PixelFlasher(wx.Frame):
         self.list = wx.ListCtrl(parent=panel, id=-1, size=(-1, self.CharHeight * 6), style=wx.LC_REPORT | wx.BORDER_SUNKEN)
         self.list.SetImageList(self.il, wx.IMAGE_LIST_SMALL)
         self.list.InsertColumn(0, 'SHA1  ', wx.LIST_FORMAT_LEFT, width=-1)
-        self.list.InsertColumn(1, 'Source SHA1  ', wx.LIST_FORMAT_LEFT, width=-1)
-        self.list.InsertColumn(2, 'Package Fingerprint  ', wx.LIST_FORMAT_LEFT, width=-1)
-        self.list.InsertColumn(3, 'Patched with Magisk  ', wx.LIST_FORMAT_LEFT, -1)
-        self.list.InsertColumn(4, 'Patch Method  ', wx.LIST_FORMAT_LEFT, -1)
-        self.list.InsertColumn(5, 'Patched on Device  ', wx.LIST_FORMAT_LEFT, -1)
-        self.list.InsertColumn(6, 'Date  ', wx.LIST_FORMAT_LEFT, -1)
-        self.list.InsertColumn(7, 'Package Path  ', wx.LIST_FORMAT_LEFT, -1)
+        self.list.InsertColumn(1, '源SHA1  ', wx.LIST_FORMAT_LEFT, width=-1)
+        self.list.InsertColumn(2, '包指纹  ', wx.LIST_FORMAT_LEFT, width=-1)
+        self.list.InsertColumn(3, '用Magisk打过补丁  ', wx.LIST_FORMAT_LEFT, -1)
+        self.list.InsertColumn(4, '打补丁方法  ', wx.LIST_FORMAT_LEFT, -1)
+        self.list.InsertColumn(5, '在设备上打过补丁  ', wx.LIST_FORMAT_LEFT, -1)
+        self.list.InsertColumn(6, '日期  ', wx.LIST_FORMAT_LEFT, -1)
+        self.list.InsertColumn(7, '包路径  ', wx.LIST_FORMAT_LEFT, -1)
         self.list.SetHeaderAttr(wx.ItemAttr(wx.Colour('BLUE'), wx.Colour('DARK GREY'), wx.Font(wx.FontInfo(10).Bold())))
         if sys.platform != "win32":
             self.list.SetFont(wx.Font(11, wx.FONTFAMILY_TELETYPE, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
@@ -3789,27 +3788,27 @@ class PixelFlasher(wx.Frame):
             column_widths.append(self.list.GetColumnWidth(i))
         # Create a new list (will be by value and not by reference)
         self.boot_column_widths = list(column_widths)
-        self.flash_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Flash Boot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.flash_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"刷入Boot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
         self.flash_boot_button.SetBitmap(images.flash_24.GetBitmap())
-        self.flash_boot_button.SetToolTip(u"Flash just the selected item")
-        self.patch_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Patch", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
+        self.flash_boot_button.SetToolTip(u"仅刷入选定的项目")
+        self.patch_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"打补丁", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
         self.patch_boot_button.SetBitmap(images.patch_24.GetBitmap())
-        self.patch_boot_button.SetToolTip(u"Patch the selected item")
+        self.patch_boot_button.SetToolTip(u"为选定的项目打补丁")
         self.patch_custom_boot_button = wx.BitmapButton(parent=panel, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         self.patch_custom_boot_button.SetBitmap(images.custom_patch_24.GetBitmap())
-        self.patch_custom_boot_button.SetToolTip(u"Custom Patch\n\nSelect a file from disk to patch, and then save the patched file to disk.\nUse this if you want to patch a manually extracted boot image.")
-        self.delete_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Delete", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
+        self.patch_custom_boot_button.SetToolTip(u"自定义补丁\n\n从磁盘选择一个文件打补丁，然后将打过补丁的文件保存到磁盘。\n如果你想对手动提取的boot镜像打补丁，使用这个。")
+        self.delete_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"删除", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
         self.delete_boot_button.SetBitmap(images.delete_24.GetBitmap())
-        self.delete_boot_button.SetToolTip(u"Delete the selected item")
-        self.boot_folder_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Open Folder", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
+        self.delete_boot_button.SetToolTip(u"删除选定的项目")
+        self.boot_folder_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"打开文件夹", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
         self.boot_folder_button.SetBitmap(images.folder_24.GetBitmap())
-        self.boot_folder_button.SetToolTip(u"Open boot files folder.")
+        self.boot_folder_button.SetToolTip(u"打开boot文件夹。")
         self.firmware_folder_button = wx.BitmapButton(parent=panel, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         self.firmware_folder_button.SetBitmap(images.folder_24.GetBitmap())
-        self.firmware_folder_button.SetToolTip(u"Open Working Directory\n\nOpens the firmware working directory.\nUse this if you want to manually run commands from the working directory")
-        self.live_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Live Boot", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
+        self.firmware_folder_button.SetToolTip(u"打开工作目录\n\n打开固件工作目录。\n如果你想手动从工作目录运行命令，使用这个。")
+        self.live_boot_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"实时启动", pos=wx.DefaultPosition, size=self.flash_boot_button.BestSize, style=0)
         self.live_boot_button.SetBitmap(images.boot_24.GetBitmap())
-        self.live_boot_button.SetToolTip(u"Live boot to the selected item")
+        self.live_boot_button.SetToolTip(u"实时启动到选定的项目")
         boot_label_v_sizer = wx.BoxSizer(wx.VERTICAL)
         boot_label_v_sizer.Add(window=self.select_boot_label, flag=wx.ALL, border=0)
         boot_label_v_sizer.AddSpacer(10)
@@ -3831,27 +3830,26 @@ class PixelFlasher(wx.Frame):
         list_sizer.Add(image_buttons_sizer, proportion=0, flag=wx.ALL|wx.EXPAND)
 
         # 8th row widgets (Flash Mode)
-        mode_label = wx.StaticText(panel, label=u"Flash Mode")
+        mode_label = wx.StaticText(panel, label=u"刷机模式")
         self.mode_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         # _add_mode_radio_button(sizer, index, flash_mode, label, tooltip)
-        _add_mode_radio_button(sizer=self.mode_sizer, index=0, flash_mode='keepData', label="Keep Data", tooltip="Data will be kept intact.")
-        _add_mode_radio_button(sizer=self.mode_sizer, index=1, flash_mode='wipeData', label="WIPE all data", tooltip="CAUTION: This will wipe your data")
-        _add_mode_radio_button(sizer=self.mode_sizer, index=2, flash_mode='dryRun', label="Dry Run", tooltip="Dry Run, no flashing will be done.\nThe phone will reboot to fastboot and then\nback to normal.\nThis is for testing.")
-        _add_mode_radio_button(sizer=self.mode_sizer, index=3, flash_mode='OTA', label="Full OTA", tooltip="Flash full OTA, and have the choice of flashing patched image(s).")
-        _add_mode_radio_button(sizer=self.mode_sizer, index=4, flash_mode='customFlash', label="Custom Flash", tooltip="Custom Flash, Advanced option to flash a single file.\nThis will not flash the factory image.\It will flash the single selected file.")
-
+        _add_mode_radio_button(sizer=self.mode_sizer, index=0, flash_mode='keepData', label="保留数据", tooltip="数据将被保留。")
+        _add_mode_radio_button(sizer=self.mode_sizer, index=1, flash_mode='wipeData', label="清除所有数据", tooltip="警告：这将清除你的数据")
+        _add_mode_radio_button(sizer=self.mode_sizer, index=2, flash_mode='dryRun', label="试运行", tooltip="试运行，不会进行刷机。\n手机将重启到fastboot然后\n返回正常。\n这是用于测试。")
+        _add_mode_radio_button(sizer=self.mode_sizer, index=3, flash_mode='OTA', label="完整OTA", tooltip="刷入完整OTA，并有选择刷入打过补丁的镜像。")
+        _add_mode_radio_button(sizer=self.mode_sizer, index=4, flash_mode='customFlash', label="自定义刷机", tooltip="自定义刷机，高级选项用于刷入单个文件。\n这将不会刷入工厂镜像。\n它将刷入单个选定的文件。")
 
         # 9th row widgets (custom flash)
-        self.live_boot_radio_button = wx.RadioButton(parent=panel, id=wx.ID_ANY, label=u"Live Boot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.RB_GROUP)
+        self.live_boot_radio_button = wx.RadioButton(parent=panel, id=wx.ID_ANY, label=u"实时启动", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.RB_GROUP)
         self.live_boot_radio_button.Enable(False)
-        self.live_boot_radio_button.SetToolTip(u"Live Boot to selected boot / init_boot")
-        self.flash_radio_button = wx.RadioButton(parent=panel, id=wx.ID_ANY, label=u"Flash", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.live_boot_radio_button.SetToolTip(u"实时启动到选定的boot / init_boot")
+        self.flash_radio_button = wx.RadioButton(parent=panel, id=wx.ID_ANY, label=u"刷机", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
         self.flash_radio_button.SetValue(True)
         self.flash_radio_button.Enable(False)
-        self.flash_radio_button.SetToolTip(u"Flashes the selected boot / init_boot")
+        self.flash_radio_button.SetToolTip(u"刷入选定的boot / init_boot")
         custom_advanced_options_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         custom_advanced_options_sizer.Add(window=self.live_boot_radio_button, proportion=0, flag=wx.ALL|wx.ALIGN_CENTER_VERTICAL, border=0)
-        custom_advanced_options_sizer.Add(window=self.flash_radio_button, proportion=0, flag=wx.ALL|wx.ALIGN_CENTER_VERTICAL, border=0)
+        custom_advanced_options_sizer.Add(window=self.flash_radio_button, proportion=0, flag=wx.ALL|wx.ALIGN_CENTER_VERTICAL, border=0)        # 2nd column
         # 2nd column
         # https://android.googlesource.com/platform/system/core/+/refs/heads/master/fastboot/fastboot.cpp#144
         image_choices = [ u"boot", u"init_boot", u"bootloader", u"cache", u"dtbo", u"dts", u"odm", u"odm_dlkm", u"product", u"pvmfw", u"radio", u"recovery", u"super", u"super_empty", u"system", u"system_dlkm", u"system_ext", u"system_other", u"userdata", u"vbmeta", u"vbmeta_system", u"vbmeta_vendor", u"vendor", u"vendor_boot", u"vendor_dlkm", u"vendor_kernel_boot", u"vendor_other", u"image", u"SIDELOAD" ]
@@ -3860,7 +3858,7 @@ class PixelFlasher(wx.Frame):
         self.image_file_picker = wx.FilePickerCtrl(parent=panel, id=wx.ID_ANY, path=wx.EmptyString, message=u"Select a file", wildcard=u"Flashable files (*.img;*.zip)|*.img;*.zip", pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.FLP_USE_TEXTCTRL)
         self.paste_selection = wx.BitmapButton(parent=panel, id=wx.ID_ANY, bitmap=wx.NullBitmap, pos=wx.DefaultPosition, size=wx.DefaultSize, style=wx.BU_AUTODRAW)
         self.paste_selection.SetBitmap(images.paste_24.GetBitmap())
-        self.paste_selection.SetToolTip(u"Depending on the flash selection, paste the appropriate path as custom image.")
+        self.paste_selection.SetToolTip(u"根据刷机选择，粘贴适当的路径作为自定义镜像。")
         custom_flash_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         custom_flash_sizer.Add(window=self.image_choice, proportion=0, flag=wx.ALL|wx.ALIGN_CENTER_VERTICAL, border=5)
         custom_flash_sizer.Add(window=self.image_file_picker, proportion=1, flag=wx.ALL|wx.ALIGN_CENTER_VERTICAL, border=0)
@@ -3868,25 +3866,25 @@ class PixelFlasher(wx.Frame):
 
 
         # 10th row widgets, Flash options
-        self.advanced_options_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"Flash Options")
-        self.flash_to_inactive_slot_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Flash to inactive slot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.flash_to_inactive_slot_checkBox.SetToolTip(u"This option when checked will flash to the alternate slot (inactive).\nKeeping the current slot intact.")
-        self.flash_both_slots_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Flash to both slots", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.flash_both_slots_checkBox.SetToolTip(u"This option when checked will flash to both slots.")
-        self.disable_verity_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Disable Verity", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.disable_verity_checkBox.SetToolTip(u"Disables Verity")
-        self.disable_verification_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Disable Verification", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.disable_verification_checkBox.SetToolTip(u"Disables Verification")
-        self.fastboot_force_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Force", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.fastboot_force_checkBox.SetToolTip(u"Force a flash operation that may be unsafe (will wipe your data)")
-        self.fastboot_verbose_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Verbose", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.fastboot_verbose_checkBox.SetToolTip(u"Set fastboot option to verbose")
-        self.temporary_root_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Temporary Root", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.temporary_root_checkBox.SetToolTip(u"This option when enabled will not flash patched boot\nInstead it will flash unpatched boot.img, but boot to Live Patched boot\nHandy to test if Magisk will cause a bootloop.\n\nPlease be aware that this temporary root will not survive a subsequent reboot.\nIf you want to make this permanent, just Flash Boot the patched boot image.")
-        self.no_reboot_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"No reboot", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.no_reboot_checkBox.SetToolTip(u"Do not reboot after flashing\nThis is useful if you want to perform other actions before reboot.")
-        self.wipe_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Wipe", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.wipe_checkBox.SetToolTip(u"This will invoke data wipe operation at the end of custom flashing.\nOne use case would be when disabling verification for the first time.")
+        self.advanced_options_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"刷机选项")
+        self.flash_to_inactive_slot_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"刷入非活动插槽", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.flash_to_inactive_slot_checkBox.SetToolTip(u"选中此选项将刷入备用插槽（非活动）。\n保持当前插槽不变。")
+        self.flash_both_slots_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"刷入所有插槽", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.flash_both_slots_checkBox.SetToolTip(u"选中此选项将刷入所有插槽。")
+        self.disable_verity_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"禁用Verity", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.disable_verity_checkBox.SetToolTip(u"禁用Verity")
+        self.disable_verification_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"禁用验证", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.disable_verification_checkBox.SetToolTip(u"禁用验证")
+        self.fastboot_force_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"强制", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.fastboot_force_checkBox.SetToolTip(u"强制执行可能不安全的刷机操作（将清除你的数据）")
+        self.fastboot_verbose_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"详细", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.fastboot_verbose_checkBox.SetToolTip(u"设置fastboot选项为详细")
+        self.temporary_root_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"临时Root", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.temporary_root_checkBox.SetToolTip(u"启用此选项时，不会刷入修补后的boot\n相反，它会刷入未修补的boot.img，但启动到Live Patched boot\n方便测试Magisk是否会导致bootloop。\n\n请注意，这个临时root在随后的重启后不会保留。\n如果你想使其永久，只需刷入修补后的boot镜像。")
+        self.no_reboot_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"不重启", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.no_reboot_checkBox.SetToolTip(u"刷机后不重启\n如果你想在重启前执行其他操作，这很有用。")
+        self.wipe_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"擦除", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.wipe_checkBox.SetToolTip(u"这将在自定义刷机结束时调用数据擦除操作。\n一个使用场景可能是首次禁用验证。")
         self.advanced_options_sizer = wx.BoxSizer(orient=wx.HORIZONTAL)
         self.advanced_options_sizer.Add(window=self.flash_to_inactive_slot_checkBox, flag=wx.ALL|wx.ALIGN_CENTER_VERTICAL, border=0)
         self.advanced_options_sizer.Add(window=self.flash_both_slots_checkBox, proportion=0, flag=wx.ALL|wx.ALIGN_CENTER_VERTICAL, border=5)
@@ -3905,15 +3903,15 @@ class PixelFlasher(wx.Frame):
         self.flash_button.SetBitmap(images.flash_32.GetBitmap())
 
         # 12th row widgets, console
-        console_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"Console", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        console_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"控制台", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
         self.spinner = wx.ActivityIndicator(panel, -1, size=(100, 100), style=0)
-        self.spinner_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"Please be patient ...", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.spinner_label = wx.StaticText(parent=panel, id=wx.ID_ANY, label=u"请耐心等待 ...", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
         self.spinner_label.SetForegroundColour((255,0,0))
         self.spinner_label.SetFont(wx.Font(wx.NORMAL_FONT.GetPointSize(), wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, wx.EmptyString))
-        self.support_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"Support", size=wx.Size(-1, 50), style=0)
+        self.support_button = wx.Button(parent=panel, id=wx.ID_ANY, label=u"支持", size=wx.Size(-1, 50), style=0)
         self.support_button.SetBitmap(images.support_24.GetBitmap())
         self.support_button.SetBitmapMargins(wx.Size(10, -1))
-        self.support_button.SetToolTip(u"Create sanitized support.zip file\nAll sensitive data is redacted.\n\nThis if absolutely required when asking for help.")
+        self.support_button.SetToolTip(u"创建清理过的support.zip文件\n所有敏感数据都已被删除。\n\n在寻求帮助时，这是绝对必要的。")
         console_v_sizer = wx.BoxSizer(orient=wx.VERTICAL)
         console_v_sizer.Add(console_label, flag=wx.ALL, border=0)
         console_v_sizer.AddSpacer(40)
@@ -3934,9 +3932,9 @@ class PixelFlasher(wx.Frame):
                 self.console_ctrl.SetDefaultStyle(wx.TextAttr(wx.BLUE))
 
         # 13th row widgets, debug and clear button
-        self.verbose_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"Debug", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
-        self.verbose_checkBox.SetToolTip(u"Enable Debug Messages in the console.")
-        clear_button = wx.Button(parent=panel, id=-1, label="Clear Console", pos=wx.DefaultPosition)
+        self.verbose_checkBox = wx.CheckBox(parent=panel, id=wx.ID_ANY, label=u"调试", pos=wx.DefaultPosition, size=wx.DefaultSize, style=0)
+        self.verbose_checkBox.SetToolTip(u"在控制台中启用调试消息。")
+        clear_button = wx.Button(parent=panel, id=-1, label="清除控制台", pos=wx.DefaultPosition)
 
         # add the rows to flexgrid
         fgs1.AddMany([
