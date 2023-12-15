@@ -355,10 +355,7 @@ def set_db(value):
 # ============================================================================
 def get_boot_images_dir():
     # boot_images did not change at version 5, so we can keep on using 4
-    if parse(VERSION) < parse('4.0.0'):
-        return 'boot_images'
-    else:
-        return 'boot_images4'
+    return 'boot_images' if parse(VERSION) < parse('4.0.0') else 'boot_images4'
 
 
 # ============================================================================
@@ -1137,10 +1134,7 @@ def check_latest_version():
 #                               Function enabled_disabled
 # ============================================================================
 def enabled_disabled(data):
-    if data:
-        return "Enabled"
-    else:
-        return "Disabled"
+    return "Enabled" if data else "Disabled"
 
 
 # ============================================================================
@@ -1158,10 +1152,7 @@ def open_folder(self, path, isFile = False):
     try:
         if not path:
             return
-        if isFile:
-            dir_path = os.path.dirname(path)
-        else:
-            dir_path = path
+        dir_path = os.path.dirname(path) if isFile else path
         if sys.platform == "darwin":
             subprocess.Popen(["open", dir_path], env=get_env_variables())
         elif sys.platform == "win32":
@@ -1182,10 +1173,7 @@ def open_folder(self, path, isFile = False):
 def open_terminal(self, path, isFile=False):
     try:
         if path:
-            if isFile:
-                dir_path = os.path.dirname(path)
-            else:
-                dir_path = path
+            dir_path = os.path.dirname(path) if isFile else path
             if sys.platform.startswith("win"):
                 subprocess.Popen(["start", "cmd.exe", "/k", "cd", "/d", dir_path], shell=True, env=get_env_variables())
             elif sys.platform.startswith("linux"):
@@ -1250,8 +1238,12 @@ def check_zip_contains_file_fast(zip_file_path, file_to_check, nested=False, is_
                         nested_zip_data = nested_zip_file.read()
                     with io.BytesIO(nested_zip_data) as nested_zip_stream:
                         with zipfile.ZipFile(nested_zip_stream, 'r') as nested_zip:
-                            nested_file_path = check_zip_contains_file_fast(nested_zip_stream, file_to_check, nested=True, is_recursive=True)
-                            if nested_file_path:
+                            if nested_file_path := check_zip_contains_file_fast(
+                                nested_zip_stream,
+                                file_to_check,
+                                nested=True,
+                                is_recursive=True,
+                            ):
                                 if not is_recursive:
                                     debug(f"Found: {name}/{nested_file_path}\n")
                                 return f'{name}/{nested_file_path}'
@@ -1326,8 +1318,12 @@ def check_tar_contains_file(tar_file_path, file_to_check, nested=False, is_recur
                     return member.name
                 elif nested and member.name.endswith('.tar'):
                     nested_tar_file_path = tar_file.extractfile(member).read()
-                    nested_file_path = check_tar_contains_file(nested_tar_file_path, file_to_check, nested=True, is_recursive=True)
-                    if nested_file_path:
+                    if nested_file_path := check_tar_contains_file(
+                        nested_tar_file_path,
+                        file_to_check,
+                        nested=True,
+                        is_recursive=True,
+                    ):
                         if not is_recursive:
                             debug(f"Found: {member.name}/{nested_file_path}\n")
                         return f'{member.name}/{nested_file_path}'
@@ -1340,8 +1336,13 @@ def check_tar_contains_file(tar_file_path, file_to_check, nested=False, is_recur
                         temp_zip_file.write(nested_zip_data)
                         temp_zip_path = temp_zip_file.name
 
-                    nested_file_path = check_zip_contains_file(temp_zip_path, file_to_check, get_low_memory(), nested=True, is_recursive=True)
-                    if nested_file_path:
+                    if nested_file_path := check_zip_contains_file(
+                        temp_zip_path,
+                        file_to_check,
+                        get_low_memory(),
+                        nested=True,
+                        is_recursive=True,
+                    ):
                         if not is_recursive:
                             debug(f"Found: {member.name}/{nested_file_path}\n")
                         return f'{member.name}/{nested_file_path}'
@@ -1375,14 +1376,13 @@ def get_filenames_in_dir(directory, isFile = False):
     # sourcery skip: inline-immediately-returned-variable, list-comprehension
     if not directory:
         return
-    if isFile:
-        dir_path = os.path.dirname(directory)
-    else:
-        dir_path = directory
+    dir_path = os.path.dirname(directory) if isFile else directory
     file_names = []
-    for file in os.listdir(dir_path):
-        if os.path.isfile(os.path.join(dir_path, file)):
-            file_names.append(file)
+    file_names.extend(
+        file
+        for file in os.listdir(dir_path)
+        if os.path.isfile(os.path.join(dir_path, file))
+    )
     return file_names
 
 
@@ -1390,10 +1390,14 @@ def get_filenames_in_dir(directory, isFile = False):
 #                               Function find_file_by_prefix
 # ============================================================================
 def find_file_by_prefix(directory, prefix):
-    for filename in os.listdir(directory):
-        if filename.startswith(prefix):
-            return os.path.join(directory, filename)
-    return None
+    return next(
+        (
+            os.path.join(directory, filename)
+            for filename in os.listdir(directory)
+            if filename.startswith(prefix)
+        ),
+        None,
+    )
 
 
 # ============================================================================
@@ -1403,8 +1407,7 @@ def get_ui_cooridnates(xmlfile, search):
     with open(xmlfile, "r", encoding='ISO-8859-1', errors="replace") as fin:
         data = fin.read()
     regex = re.compile(f"{search}.*?bounds\=\"\[(\d+),(\d+)\]\[(\d+),(\d+)\]\".+")
-    m = re.findall(regex, data)
-    if m:
+    if m := re.findall(regex, data):
         debug(f"Found Bounds: {m[0][0]} {m[0][1]} {m[0][2]} {m[0][3]}")
         x = int((int(m[0][0]) + int(m[0][2])) / 2)
         y = int((int(m[0][1]) + int(m[0][3])) / 2)
@@ -1628,8 +1631,7 @@ def get_code_page():
     try:
         if sys.platform != "win32":
             return
-        cp = get_system_codepage()
-        if cp:
+        if cp := get_system_codepage():
             print(f"Active code page: {cp}")
         else:
             theCmd = "chcp"
@@ -1986,13 +1988,7 @@ def download_file(url, filename = None):
 #                               Function get_first_match
 # ============================================================================
 def get_first_match(dictionary, keys):
-    for key in keys:
-        if key in dictionary:
-            value = dictionary[key]
-            break
-    else:
-        value = ''
-    return value
+    return next((dictionary[key] for key in keys if key in dictionary), '')
 
 
 # ============================================================================

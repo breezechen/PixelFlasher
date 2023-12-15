@@ -169,10 +169,7 @@ IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
         grow_column(self.list, 0, 20)
 
         self.currentItem = 0
-        if itemDataMap:
-            return itemDataMap
-        else:
-            return -1
+        return itemDataMap if itemDataMap else -1
 
     # -----------------------------------------------
     #              Function Check_UncheckAll
@@ -245,11 +242,11 @@ IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
     #          Function Update_all_checkbox
     # -----------------------------------------------
     def Update_all_checkbox(self):
-        i = 0
-        for index in range(self.list.GetItemCount()):
-            if self.list.IsItemChecked(index):
-                # print(f"{self.list.GetItem(index).Text} item is checked")
-                i += 1
+        i = sum(
+            1
+            for index in range(self.list.GetItemCount())
+            if self.list.IsItemChecked(index)
+        )
         # print(f"Checked items count: {i}")
         if i == 0:
             self.all_checkbox.Set3StateValue(0)
@@ -477,11 +474,11 @@ IT IS YOUR RESPONSIBILITY TO ENSURE THAT YOU KNOW WHAT YOU ARE DOING.
     #         Function GetItemsCheckedCount
     # -----------------------------------------------
     def GetItemsCheckedCount(self):
-        checked_count = 0
-        for i in range(self.list.GetItemCount()):
-            if self.list.IsItemChecked(i):
-                checked_count += 1
-        return checked_count
+        return sum(
+            1
+            for i in range(self.list.GetItemCount())
+            if self.list.IsItemChecked(i)
+        )
 
     # -----------------------------------------------
     #          Function ApplySingleAction

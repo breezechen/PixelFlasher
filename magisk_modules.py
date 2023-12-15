@@ -23,8 +23,7 @@ class HtmlWindow(wx.html.HtmlWindow):
         webbrowser.open(link.GetHref())
 
     def CopySelectedText(self):
-        selection = self.SelectionToText()
-        if selection:
+        if selection := self.SelectionToText():
             data = wx.TextDataObject()
             data.SetText(selection)
             clipboard = wx.Clipboard.Get()
@@ -1101,8 +1100,7 @@ class MagiskModules(wx.Dialog):
             ro_build_id = None
             if ro_build_id is None or ro_build_id == '':
                 pattern = r'[^\/]*\/[^\/]*\/[^:]*:[^\/]*\/([^\/]*)\/[^\/]*\/[^\/]*'
-                match = re.search(pattern, ro_build_fingerprint)
-                if match:
+                if match := re.search(pattern, ro_build_fingerprint):
                     ro_build_id = match[1]
 
             # VNDK_VERSION
@@ -1227,10 +1225,7 @@ class MagiskModules(wx.Dialog):
         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} User Pressed Ok.")
         modules = device.get_magisk_detailed_modules()
         for i in range(0, self.list.ItemCount, 1):
-            if modules[i].state == 'enabled':
-                module_state = True
-            else:
-                module_state = False
+            module_state = modules[i].state == 'enabled'
             list_state = self.list.IsItemChecked(i)
 
             if list_state == module_state:

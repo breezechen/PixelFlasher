@@ -1295,18 +1295,14 @@ class PixelFlasher(wx.Frame):
                 selected_folder = folderDialog.GetPath()
 
             self._on_spin('start')
-            device = get_phone()
-            if device:
+            if device := get_phone():
                 apk_files = [file for file in os.listdir(selected_folder) if file.endswith(".apk")]
                 show_playstore_prompt = True
                 for apk_file in apk_files:
                     if show_playstore_prompt:
                         dlg = wx.MessageDialog(None, "Do you want to set the ownership to Play Store Market?\nNote: This will apply to all the current bulk apks.\n(Android auto apps require that they be installed from the Play Market.)",'Set Play Market',wx.YES_NO | wx.ICON_EXCLAMATION)
                         result = dlg.ShowModal()
-                        if result != wx.ID_YES:
-                            owner_playstore = False
-                        else:
-                            owner_playstore = True
+                        owner_playstore = result == wx.ID_YES
                         show_playstore_prompt = False
                     apk_path = os.path.join(selected_folder, apk_file)
                     res = device.install_apk(apk_path, fastboot_included=True, owner_playstore=owner_playstore)
@@ -1726,8 +1722,7 @@ class PixelFlasher(wx.Frame):
         message += f"    Device Mode:                     {device.true_mode}\n"
         with contextlib.suppress(Exception):
             android_devices = get_android_devices()
-            android_device = android_devices[device.hardware]
-            if android_device:
+            if android_device := android_devices[device.hardware]:
                 message += f"    Device:                          {android_device['device']}\n"
                 message += f"    Device Version End Date:         {android_device['android_version_end_date']}\n"
                 message += f"    Device Secuity Update End Date:  {android_device['security_update_end_date']}\n"
@@ -1900,14 +1895,12 @@ class PixelFlasher(wx.Frame):
     # -----------------------------------------------
     def _select_configured_device(self):
         if self.config.device:
-            count = 0
-            for device in get_phones():
+            for count, device in enumerate(get_phones()):
                 if device.id == self.config.device:
                     self.device_choice.Select(count)
                     set_phone_id(device.id)
                     puml(f":Select Device;\n", True)
                     self._print_device_details(device)
-                count += 1
         elif self.device_choice.StringSelection:
             device = self.device_choice.StringSelection
             # replace multiple spaces with a single space and then split on space
@@ -1938,10 +1931,7 @@ class PixelFlasher(wx.Frame):
     def refresh_device(self):
         print("Updating connected devices ...")
         selected_device = self.device_choice.StringSelection
-        selected_device_id = None
-        if selected_device:
-            # selected_device_id = selected_device.split()[2]
-            selected_device_id = self.config.device
+        selected_device_id = self.config.device if selected_device else None
         self.device_choice.Clear()
         phones = get_phones()
         for device in phones:
@@ -1958,8 +1948,7 @@ class PixelFlasher(wx.Frame):
     #                  _reflect_slots
     # -----------------------------------------------
     def _reflect_slots(self):
-        device = get_phone()
-        if device:
+        if device := get_phone():
             if device.active_slot == 'a':
                 self.device_label.Label = "ADB Connected Devices\nCurrent Active Slot: [A]"
                 self.update_slot_image('a')
