@@ -214,10 +214,7 @@ class Wireless(wx.Dialog, listmix.ColumnSorterMixin):
             grow_column(self.list, 1, 20)
 
             self.currentItem = 0
-            if itemDataMap:
-                return itemDataMap
-            else:
-                return -1
+            return itemDataMap if itemDataMap else -1
         except Exception as e:
             print(f"\n{datetime.now():%Y-%m-%d %H:%M:%S} ERROR: Encountered an error while populating wifi history")
             puml("#red:Encountered an error while populating wifi history;\n")
@@ -325,8 +322,9 @@ class Wireless(wx.Dialog, listmix.ColumnSorterMixin):
         try:
             if self.ip_ctrl.Value:
                 self._on_spin('start')
-                res = self.wifi_adb_action(self.ip_ctrl.Value, self.port.Value)
-                if res:
+                if res := self.wifi_adb_action(
+                    self.ip_ctrl.Value, self.port.Value
+                ):
                     self.add_to_history(action='connect', status="Failed", note=res)
                 else:
                     self.add_to_history(action='connect', status="Success")
@@ -348,8 +346,9 @@ class Wireless(wx.Dialog, listmix.ColumnSorterMixin):
         try:
             if self.ip_ctrl.Value:
                 self._on_spin('start')
-                res = self.wifi_adb_action(self.ip_ctrl.Value, self.port.Value, disconnect=True)
-                if res:
+                if res := self.wifi_adb_action(
+                    self.ip_ctrl.Value, self.port.Value, disconnect=True
+                ):
                     self.add_to_history(action='disconnect', status="Failed", note=res)
                 else:
                     self.add_to_history(action='disconnect', status="Success")

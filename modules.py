@@ -158,12 +158,7 @@ def populate_boot_list(self, sortColumn=None, sorting_direction='ASC'):
         # Apply filter if show all is not selected
         parameters = []
         if not self.config.show_all_boot:
-            rom_path = ''
-            firmware_path = ''
-            if self.config.custom_rom and self.config.advanced_options:
-                rom_path = self.config.custom_rom_path
-            if self.config.firmware_path:
-                firmware_path = self.config.firmware_path
+            firmware_path = self.config.firmware_path if self.config.firmware_path else ''
             sql += """
                 WHERE
                     (BOOT.is_patched = 0 AND PACKAGE.file_path IN (?, ?))
@@ -179,6 +174,11 @@ def populate_boot_list(self, sortColumn=None, sorting_direction='ASC'):
                             (BOOT.is_patched = 0 AND PACKAGE.file_path IN (?, ?))
                     ))
             """
+            rom_path = (
+                self.config.custom_rom_path
+                if self.config.custom_rom and self.config.advanced_options
+                else ''
+            )
             parameters.extend([firmware_path, rom_path, firmware_path, rom_path])
 
         # Clear the previous sort order arrows
@@ -213,8 +213,7 @@ def populate_boot_list(self, sortColumn=None, sorting_direction='ASC'):
                 7: 'BOOT.epoch',
                 8: 'PACKAGE.file_path'
             }
-            column_name = column_map.get(sortColumn, '')
-            if column_name:
+            if column_name := column_map.get(sortColumn, ''):
                 sql += f" ORDER BY {column_name} {sorting_direction};"
         else:
             # Add default sorting

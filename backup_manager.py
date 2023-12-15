@@ -180,10 +180,7 @@ class BackupManager(wx.Dialog, listmix.ColumnSorterMixin):
         grow_column(self.list, 1, 20)
 
         self.currentItem = 0
-        if itemDataMap:
-            return itemDataMap
-        else:
-            return -1
+        return itemDataMap if itemDataMap else -1
 
     # -----------------------------------------------
     #              Function Check_UncheckAll
@@ -264,11 +261,11 @@ class BackupManager(wx.Dialog, listmix.ColumnSorterMixin):
     #          Function Update_all_checkbox
     # -----------------------------------------------
     def Update_all_checkbox(self):
-        i = 0
-        for index in range(self.list.GetItemCount()):
-            if self.list.IsItemChecked(index):
-                # print(f"{self.list.GetItem(index).Text} item is checked")
-                i += 1
+        i = sum(
+            1
+            for index in range(self.list.GetItemCount())
+            if self.list.IsItemChecked(index)
+        )
         # print(f"Checked items count: {i}")
         if i == 0:
             self.all_checkbox.Set3StateValue(0)

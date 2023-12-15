@@ -83,8 +83,7 @@ class MagiskDownloads(wx.Dialog):
         if sys.platform == "win32":
             self.list.SetHeaderAttr(wx.ItemAttr(wx.Colour('BLUE'),wx.Colour('DARK GREY'), wx.Font(wx.FontInfo(10).Bold())))
 
-        i = 0
-        for apk in apks:
+        for i, apk in enumerate(apks):
             if apk.type:
                 index = self.list.InsertItem(i, apk.type)
                 if apk.type in ('stable', 'beta', 'canary', 'debug'):
@@ -99,8 +98,6 @@ class MagiskDownloads(wx.Dialog):
                 self.list.SetItem(index, 3, apk.link)
             if apk.package:
                 self.list.SetItem(index, 4, apk.package)
-            i += 1
-
         self.list.SetColumnWidth(0, -2)
         grow_column(self.list, 0, 20)
         self.list.SetColumnWidth(1, -2)

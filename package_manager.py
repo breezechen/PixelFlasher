@@ -412,10 +412,7 @@ class PackageManager(wx.Dialog, listmix.ColumnSorterMixin):
         grow_column(self.list, 7, 20)
 
         self.currentItem = 0
-        if itemDataMap:
-            return itemDataMap
-        else:
-            return -1
+        return itemDataMap if itemDataMap else -1
 
     # -----------------------------------------------
     #                  OnColClick
@@ -537,11 +534,11 @@ class PackageManager(wx.Dialog, listmix.ColumnSorterMixin):
     #          Function Update_all_checkbox
     # -----------------------------------------------
     def Update_all_checkbox(self):
-        i = 0
-        for index in range(self.list.GetItemCount()):
-            if self.list.IsItemChecked(index):
-                # print(f"{self.list.GetItem(index).Text} item is checked")
-                i += 1
+        i = sum(
+            1
+            for index in range(self.list.GetItemCount())
+            if self.list.IsItemChecked(index)
+        )
         # print(f"Checked items count: {i}")
         if i == 0:
             self.all_checkbox.Set3StateValue(0)
@@ -557,11 +554,11 @@ class PackageManager(wx.Dialog, listmix.ColumnSorterMixin):
     #         Function GetItemsCheckedCount
     # -----------------------------------------------
     def GetItemsCheckedCount(self):
-        checked_count = 0
-        for i in range(self.list.GetItemCount()):
-            if self.list.IsItemChecked(i):
-                checked_count += 1
-        return checked_count
+        return sum(
+            1
+            for i in range(self.list.GetItemCount())
+            if self.list.IsItemChecked(i)
+        )
 
     # -----------------------------------------------
     #                  EnableDisableButton
@@ -579,8 +576,7 @@ class PackageManager(wx.Dialog, listmix.ColumnSorterMixin):
     # -----------------------------------------------
     def OnClose(self, e):
         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} User Pressed Close.")
-        labels = get_labels()
-        if (labels):
+        if labels := get_labels():
             with open(get_labels_file_path(), "w", encoding='ISO-8859-1', errors="replace") as f:
                 # Write the dictionary to the file in JSON format
                 json.dump(labels, f, indent=4)
@@ -676,18 +672,14 @@ class PackageManager(wx.Dialog, listmix.ColumnSorterMixin):
                 selected_folder = folderDialog.GetPath()
 
             self._on_spin('start')
-            device = get_phone()
-            if device:
+            if device := get_phone():
                 apk_files = [file for file in os.listdir(selected_folder) if file.endswith(".apk")]
                 show_playstore_prompt = True
                 for apk_file in apk_files:
                     if show_playstore_prompt:
                         dlg = wx.MessageDialog(None, "Do you want to set the ownership to Play Store Market?\nNote: This will apply to all the current bulk apks.\n(Android auto apps require that they be installed from the Play Market.)",'Set Play Market',wx.YES_NO | wx.ICON_EXCLAMATION)
                         result = dlg.ShowModal()
-                        if result != wx.ID_YES:
-                            owner_playstore = False
-                        else:
-                            owner_playstore = True
+                        owner_playstore = result == wx.ID_YES
                         show_playstore_prompt = False
                     apk_path = os.path.join(selected_folder, apk_file)
                     res = device.install_apk(apk_path, fastboot_included=True, owner_playstore=owner_playstore)
@@ -1120,11 +1112,7 @@ class PackageManager(wx.Dialog, listmix.ColumnSorterMixin):
         # magisk_denylist = self.list.GetItem(index, 5).Text
         # uid = self.list.GetItem(index, 6).Text
         # label = self.list.GetItem(index, 7).Text
-        if type == 'System':
-            isSystem = True
-        else:
-            isSystem = False
-
+        isSystem = type == 'System'
         if not self.device:
             print(f"\n{datetime.now():%Y-%m-%d %H:%M:%S} ERROR: You must first select a valid device.")
             return

@@ -82,10 +82,7 @@ class Device():
         # Instance variables
         self.id = id
         self.mode = mode
-        if true_mode:
-            self.true_mode = true_mode
-        else:
-            self.true_mode = mode
+        self.true_mode = true_mode if true_mode else mode
         # The below are for caching.
         self._adb_device_info = None
         self._fastboot_device_info = None
@@ -216,11 +213,7 @@ class Device():
         try:
             theCmd = f"\"{get_adb()}\" -s {self.id} shell dumpsys battery"
             res = run_shell(theCmd)
-            if res.returncode == 0:
-                # path = self.get_path_from_details(res.stdout)
-                return res.stdout #, path
-            else:
-                return '', ''
+            return res.stdout if res.returncode == 0 else ('', '')
         except Exception as e:
             traceback.print_exc()
             print(f"\n{datetime.now():%Y-%m-%d %H:%M:%S} ERROR: Could not get battery details.")
@@ -233,11 +226,7 @@ class Device():
     def get_path_from_details(self, details):
         try:
             pattern = re.compile(r'(?s)Dexopt state:.*?path:(.*?)\n(?!.*path:)', re.DOTALL)
-            match = re.search(pattern, details)
-            if match:
-                return match[1].strip()
-            else:
-                return ''
+            return match[1].strip() if (match := re.search(pattern, details)) else ''
         except Exception as e:
             traceback.print_exc()
             print(f"\n{datetime.now():%Y-%m-%d %H:%M:%S} ERROR: Could not get_path_from_package_details.")
